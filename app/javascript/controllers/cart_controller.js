@@ -51,6 +51,7 @@ export default class extends Controller {
       cart.splice(index, 1);
     }
     localStorage.setItem("cart", JSON.stringify(cart));
+    
     // NUEVA LÍNEA: Notificar al header
     window.dispatchEvent(new CustomEvent('cartUpdated'));
     window.location.reload();
