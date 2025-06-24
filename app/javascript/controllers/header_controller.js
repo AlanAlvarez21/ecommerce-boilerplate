@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = ["cartCount", "mobileMenu"]
 
   connect() {
-    console.log("Header controller connected");
     this.updateCartCount();
     
     // Actualizar contador cada vez que cambie el localStorage
@@ -23,9 +22,7 @@ export default class extends Controller {
   updateCartCount() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     const totalQuantity = cart.reduce((total, item) => total + parseInt(item.quantity), 0);
-    
-    console.log("Updating cart count:", totalQuantity);
-    
+        
     if (this.hasCartCountTarget) {
       const cartCountElement = this.cartCountTarget;
       

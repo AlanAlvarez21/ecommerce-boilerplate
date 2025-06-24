@@ -10,10 +10,10 @@
     <!-- Coins Price Card -->
     <%= render 'shared/coins_price_card'%>
 
-    <!-- Image Slider -->
-    <section class="relative mt-12 mb-16">
-      <div class="relative overflow-hidden rounded-2xl slider">
-        <div class="flex transition-transform duration-300 ease-in-out">
+    <!-- Image Slider  -->
+    <section class="relative mt-12 mb-16" data-controller="slider">
+      <div class="relative overflow-hidden rounded-2xl">
+        <div data-slider-target="slider" class="flex transition-transform duration-300 ease-in-out">
           <div class="flex-shrink-0 w-full">
             <img src="https://laopinion.com/wp-content/uploads/sites/3/2024/04/costco-tambien-vende-monedas-de-oro-vale-la-prena-comprarlas-589412678-e1713820525314.jpg?w=1200?height=400&width=800" alt="Moneda de oro antigua" class="object-cover w-full h-64 md:h-96">
           </div>
@@ -24,12 +24,16 @@
             <img src="https://museobancodemexico.mx/imgs/Cabecera-Colecci%C3%B3n-Numismatica.jpg?height=400&width=800" alt="Moneda conmemorativa" class="object-cover w-full h-64 md:h-96">
           </div>
         </div>
-        <button id="prevSlide" class="absolute p-2 transition duration-300 transform -translate-y-1/2 bg-white bg-opacity-75 rounded-full shadow-md top-1/2 left-4 focus:outline-none hover:bg-opacity-100">
+        <button 
+          data-action="click->slider#previousSlide" 
+          class="absolute p-2 transition duration-300 transform -translate-y-1/2 bg-white bg-opacity-75 rounded-full shadow-md top-1/2 left-4 focus:outline-none hover:bg-opacity-100">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-slate-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-        <button id="nextSlide" class="absolute p-2 transition duration-300 transform -translate-y-1/2 bg-white bg-opacity-75 rounded-full shadow-md top-1/2 right-4 focus:outline-none hover:bg-opacity-100">
+        <button 
+          data-action="click->slider#nextSlide" 
+          class="absolute p-2 transition duration-300 transform -translate-y-1/2 bg-white bg-opacity-75 rounded-full shadow-md top-1/2 right-4 focus:outline-none hover:bg-opacity-100">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-slate-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
           </svg>
@@ -99,24 +103,4 @@
       </div>
     </section>
   </main>
-
-  <script>
-    // Image slider functionality (unchanged)
-    const slider = document.querySelector('.slider > div');
-    const prevButton = document.getElementById('prevSlide');
-    const nextButton = document.getElementById('nextSlide');
-    let currentSlide = 0;
-    const totalSlides = slider.children.length;
-
-    function showSlide(index) {
-      currentSlide = (index + totalSlides) % totalSlides;
-      slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-    }
-
-    prevButton.addEventListener('click', () => showSlide(currentSlide - 1));
-    nextButton.addEventListener('click', () => showSlide(currentSlide + 1));
-
-    // Auto-advance slides every 5 seconds
-    setInterval(() => showSlide(currentSlide + 1), 5000);
-  </script>
 </div>
