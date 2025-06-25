@@ -37,7 +37,6 @@ export default class extends Controller {
 
   clear() {
     localStorage.removeItem("cart");
-    // NUEVA LÍNEA: Notificar al header
     window.dispatchEvent(new CustomEvent('cartUpdated'));
     window.location.reload();
   }
@@ -52,7 +51,6 @@ export default class extends Controller {
     }
     localStorage.setItem("cart", JSON.stringify(cart));
     
-    // NUEVA LÍNEA: Notificar al header
     window.dispatchEvent(new CustomEvent('cartUpdated'));
     window.location.reload();
   }
