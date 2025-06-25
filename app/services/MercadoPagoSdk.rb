@@ -1,13 +1,13 @@
 class MercadoPagoSdk
-    require 'mercadopago'
-    
+    require "mercadopago"
+
     def initialize
-      @access_token = ENV['MP_ACCESS_TOKEN']
+      @access_token = ENV["MP_ACCESS_TOKEN"]
     end
-    
+
     def create_preference(line_items)
       mp = Mercadopago::SDK.new(@access_token)
-      
+
       preference_data = {
         "back_urls" => {
           "success" => Rails.env.production? ? "https://yourapp.com/success" : "http://localhost:3000/success",
@@ -22,7 +22,7 @@ class MercadoPagoSdk
           },
           "email" => "",
           "identification" => {
-            "number" => "", 
+            "number" => "",
             "type" => ""
           }
         },
@@ -31,9 +31,9 @@ class MercadoPagoSdk
         "auto_return" => "approved",
         "external_reference" => "order_#{Time.current.to_i}"
       }
-      
+
       preference = mp.preference.create(preference_data)
-      
+
       if preference[:status] == 201
         Rails.env.production? ? preference[:response]["init_point"] : preference[:response]["sandbox_init_point"]
       else
@@ -41,7 +41,7 @@ class MercadoPagoSdk
         nil
       end
     end
-    
+
     # Método helper para formatear items del carrito
     def format_cart_items(cart)
       cart.map do |item|

@@ -3,7 +3,7 @@ class UpdateCoinPricesJob < ApplicationJob
   queue_as :default
 
   def perform(*args)
-    assets = ['Oro', 'Plata']
+    assets = [ "Oro", "Plata" ]
     assets.each do |asset|
       PricesHelper.obtener_precios(asset)
     end

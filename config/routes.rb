@@ -17,17 +17,16 @@ Rails.application.routes.draw do
       end
   end
 
-  resources :categories, only: [:show]
+  resources :categories, only: [ :show ]
 
   get "admin" => "admin#index"
   get "cart" => "cart#show"
-  get 'precios', to: 'precios#index'
+  get "precios", to: "precios#index"
 
   post "checkout" => "checkouts#create"
   get "success" => "checkouts#success"
   get "cancel" => "checkouts#cancel"
 
-  resources :products, only: [:show]
+  resources :products, only: [ :show ]
   resources :templates
-
 end

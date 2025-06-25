@@ -5,14 +5,14 @@ Category.create!([
     name: "Monedas Oro",
     description: "Categoría Monedas de Oro",
     image: nil,
-    image_url: "https://www.banxico.org.mx/multimedia/rev_1kg_oro....",
+    image_url: "https://www.banxico.org.mx/multimedia/rev_1kg_oro...."
   },
   {
     id: "01b3b429-9a07-4cc2-960e-55d6ecd8cec3",
     name: "Plata",
     description: "Categoría Monedas de Plata",
     image: nil,
-    image_url: "https://www.banxico.org.mx/multimedia/quijoteanv.p...",
+    image_url: "https://www.banxico.org.mx/multimedia/quijoteanv.p..."
 
   },
   {
@@ -20,14 +20,14 @@ Category.create!([
     name: "Numismática",
     description: "Colección Numismática",
     image: nil,
-    image_url: "https://www.banxico.org.mx/multimedia/busto.png",
+    image_url: "https://www.banxico.org.mx/multimedia/busto.png"
   },
   {
     id: "0cd3a722-89d0-452a-9a39-8948322e4e89",
     name: "Billetes",
     description: "Colección de Billetes",
     image: nil,
-    image_url: "https://www.banxico.org.mx/multimedia/famG_tamanio...",
+    image_url: "https://www.banxico.org.mx/multimedia/famG_tamanio..."
   }
 ])
 

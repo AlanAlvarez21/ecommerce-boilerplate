@@ -1,8 +1,7 @@
-class CheckoutController < ApplicationController
-    
+class CheckoutsController < ApplicationController
     def create
         cart = params[:cart]
-        
+
         line_items = cart.map do |item|
             product = Product.find(item["id"])
             product_stock = product.stocks.find { |stock| stock.size == item["size"] }
