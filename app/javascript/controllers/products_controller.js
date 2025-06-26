@@ -42,7 +42,8 @@ export default class extends Controller {
           name: this.productValue.name,
           price: this.productValue.price,
           size: this.sizeValue,
-          quantity: 1
+          quantity: 1,
+          image_url: this.productValue.image_url
         };
         console.log("Adding new item:", newItem);
         cartArray.push(newItem);

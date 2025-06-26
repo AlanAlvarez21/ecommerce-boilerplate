@@ -17,15 +17,19 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :categories, only: [ :show ]
+  resources :categories, only: [ :show ]     
 
   get "admin" => "admin#index"
   get "cart" => "cart#show"
   get "precios", to: "precios#index"
 
-  post "checkout" => "checkouts#create"
-  get "success" => "checkouts#success"
-  get "cancel" => "checkouts#cancel"
+  
+  post "webhooks/mercadopago" => 'webhooks#mercadopago'
+  
+  post '/checkout', to: 'checkouts#create'
+  get '/checkout/success', to: 'checkouts#success'
+  get '/checkout/failure', to: 'checkouts#failure'  
+  get '/checkout/pending', to: 'checkouts#pending'
 
   resources :products, only: [ :show ]
   resources :templates
