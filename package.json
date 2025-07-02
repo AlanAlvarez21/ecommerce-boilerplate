@@ -1,0 +1,42 @@
+{
+  "name": "coins-ecommerce-app",
+  "private": true,
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.1",
+    "@hotwired/turbo-rails": "^8.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/user-event": "^14.5.1"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": ["<rootDir>/test/javascript/setup.js"],
+    "testMatch": ["<rootDir>/test/javascript/**/*.test.js"],
+    "moduleNameMapping": {
+      "^@/(.*)$": "<rootDir>/app/javascript/$1"
+    },
+    "collectCoverageFrom": [
+      "app/javascript/controllers/**/*.js",
+      "!app/javascript/controllers/index.js",
+      "!app/javascript/controllers/application.js"
+    ],
+    "coverageDirectory": "coverage/javascript",
+    "coverageReporters": ["text", "lcov", "html"],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  }
+}

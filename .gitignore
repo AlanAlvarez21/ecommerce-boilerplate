@@ -38,3 +38,13 @@
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
+
+# Ignore test coverage reports
+/coverage/
+/coverage/*
+
+# Ignore node_modules
+/node_modules
+
+# Ignore yarn files
+yarn-error.log
