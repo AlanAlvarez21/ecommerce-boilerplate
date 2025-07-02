@@ -30,8 +30,6 @@ class CheckoutsController < ApplicationController
     end
 
     begin
-
-      byebug
       user_info = {
         email: params[:email] || "test@example.com",
         zip_code: params[:zip_code] || "",
