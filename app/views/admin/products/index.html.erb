@@ -9,11 +9,11 @@
         <div class="flex flex-col items-center gap-8 px-4 mb-4 md:flex-row md:items-center md:justify-between">
           <div>
             <h1 class="mt-12 font-sans text-xl font-semibold leading-snug tracking-normal text-center md:text-left text-blue-gray-900">
-              Productos
+              <%= t('admin.products.title') %>
             </h1>
           </div>
           <div class="flex justify-center gap-2 shrink-0 md:w-auto">
-            <%= link_to "Nuevo Producto", new_admin_product_path, class: "mt-12 flex items-center gap-3 rounded-lg bg-yellow-500 py-2 px-4 text-white font-bold shadow-md hover:shadow-lg focus:opacity-85 active:opacity-85" %>
+            <%= link_to t('admin.products.new_product'), new_admin_product_path, class: "mt-12 flex items-center gap-3 rounded-lg bg-yellow-500 py-2 px-4 text-white font-bold shadow-md hover:shadow-lg focus:opacity-85 active:opacity-85" %>
           </div>
         </div>
       </div>
@@ -35,9 +35,9 @@
                 />
                 <p><%= admin_product.description %></p>
                 <p data-label="Name" class="p-4 text-left">
-                  Precio: <%= number_to_currency(admin_product.price) %>
+                  <%= t('admin.products.price') %>: <%= number_to_currency(admin_product.price) %>
                 </p>
-                <%= link_to 'Mostrar Producto', admin_product_path(admin_product), class: "hover:bg-gray-400 rounded-lg py-2 px-4 bg-gray-200 inline-block font-medium mt-4" %>
+                <%= link_to t('admin.products.show_product'), admin_product_path(admin_product), class: "hover:bg-gray-400 rounded-lg py-2 px-4 bg-gray-200 inline-block font-medium mt-4" %>
               </div>
             </div>
           <% end %>

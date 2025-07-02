@@ -5,7 +5,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M19 12H5M12 19l-7-7 7-7"/>
         </svg>
-        Volver al Inicio
+<%= t('navigation.back_to_home') %>
       <% end %>
     </div>
     <div class="grid grid-cols-1 gap-12 lg:grid-cols-2">
@@ -21,7 +21,7 @@
           </div>
         <% else %>
           <p class="text-lg text-center text-slate-600">
-            No hay imágenes disponibles para este producto.
+            <%= t('product.no_images') %>
           </p>
         <% end %>
       </div>
@@ -40,7 +40,7 @@
 
         <!-- Available Sizes -->
         <h3 class="mb-4 text-xl font-semibold text-slate-800">
-          Tamaños disponibles:
+          <%= t('product.available_sizes') %>:
         </h3>
         <div class="flex flex-wrap gap-2 mb-8">
           <% @product.stocks.each do |stock| %>
@@ -50,7 +50,7 @@
               </button>
             <% else %>
               <button disabled value="<%= stock.size %>" class="px-4 py-2 text-sm font-medium rounded-full text-slate-400 bg-slate-200">
-                <%= stock.size %> (Agotado)
+                <%= stock.size %> (<%= t('product.sold_out') %>)
               </button>
             <% end %>
           <% end %>
@@ -60,14 +60,14 @@
         <div class="flex flex-wrap gap-4 mt-auto">
           <a
             href="#"
-            title="Añadir a favoritos"
+            title="<%= t('product.add_to_favorites') %>"
             class="px-6 py-3 text-sm font-medium transition duration-300 rounded-full text-emerald-700 bg-emerald-100 hover:bg-emerald-200 focus:ring-4 focus:ring-emerald-100"
           >
-            Añadir a favoritos
+            <%= t('product.add_to_favorites') %>
           </a>
           <div id="selected-size" class="text-lg font-medium text-slate-600"></div> 
           <button data-action="click->products#addToCart" class="px-6 py-3 text-sm font-medium text-white transition duration-300 rounded-full bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500">
-            Añadir al Carrito
+            <%= t('home.popular_coins.add_to_cart') %>
           </button>
         </div>
       </div>

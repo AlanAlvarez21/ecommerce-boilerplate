@@ -1,7 +1,7 @@
 <div class="bg-gray-100">
     <!-- Botón para abrir/cerrar el sidebar -->
     <button id="sidebarToggle" type="button" class="fixed z-50 inline-flex items-center p-2 mt-3 ml-5 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-        <span class="sr-only">Abrir sidebar</span>
+        <span class="sr-only"><%= t('admin.sidebar.open') %></span>
         <svg class="w-6 h-6" aria-hidden="true" fill="gray" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
         </svg>
@@ -12,10 +12,10 @@
         <div class="flex flex-col justify-between h-full px-3 py-4 overflow-y-auto bg-gray-800 rounded-r-lg md:rounded-none">
             <ul class="mt-16 space-y-2 font-medium text-white">
                 <% [
-                    { path: admin_path, icon: 'gauge-high', label: 'Dashboard' },
-                    { path: admin_orders_path, icon: 'truck-fast', label: 'Ordenes' },
-                    { path: admin_products_path, icon: 'cart-shopping', label: 'Productos' },
-                    { path: admin_categories_path, icon: 'list', label: 'Categorías' }
+                    { path: admin_path, icon: 'gauge-high', label: t('admin.sidebar.dashboard') },
+                    { path: admin_orders_path, icon: 'truck-fast', label: t('admin.sidebar.orders') },
+                    { path: admin_products_path, icon: 'cart-shopping', label: t('admin.sidebar.products') },
+                    { path: admin_categories_path, icon: 'list', label: t('admin.sidebar.categories') }
                 ].each do |item| %>
                     <li>
                         <%= link_to item[:path], class: "flex items-center p-3 rounded-lg hover:bg-gray-700 #{'bg-gray-700' if current_page?(item[:path])} sidebar-item" do %>
@@ -29,9 +29,9 @@
                 <!-- Botón de cerrar sesión -->
                 <div class="mt-0 text-white lg:mt-auto">
                     <%= form_with url: destroy_admin_session_path, method: :delete, class: 'inline' do %>
-                        <button type="submit" class="flex items-center w-full p-3 rounded-lg hover:bg-gray-700" data-confirm="Are you sure you want to sign out?">
+                        <button type="submit" class="flex items-center w-full p-3 rounded-lg hover:bg-gray-700" data-confirm="<%= t('admin.sidebar.logout_confirm') %>">
                             <%= icon('fa-solid', 'sign-out', class: 'w-5 h-5 mr-2') %> 
-                            <span>Cerrar Sesión</span>
+                            <span><%= t('admin.sidebar.logout') %></span>
                         </button>
                     <% end %>
                 </div>

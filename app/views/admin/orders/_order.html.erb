@@ -1,37 +1,37 @@
 <div id="<%= dom_id order %>">
   <p class="my-5">
-    <strong class="block mb-1 font-medium">Customer email:</strong>
+    <strong class="block mb-1 font-medium"><%= t('admin.labels.customer_email') %>:</strong>
     <%= order.customer_email %>
   </p>
 
   <p class="my-5">
-    <strong class="block mb-1 font-medium">Fulfilled:</strong>
+    <strong class="block mb-1 font-medium"><%= t('admin.labels.fulfilled') %>:</strong>
     <%= order.fulfilled %>
   </p>
 
   <p class="my-5">
-    <strong class="block mb-1 font-medium">Total:</strong>
+    <strong class="block mb-1 font-medium"><%= t('admin.labels.total') %>:</strong>
     <%= order.total %>
   </p>
 
   <p class="my-5">
-    <strong class="block mb-1 font-medium">Address:</strong>
+    <strong class="block mb-1 font-medium"><%= t('admin.labels.address') %>:</strong>
     <%= order.address %>
   </p>
 
   <% if order.order_products.any? %>
-  <strong class="mt-6 mb-3 font-mediuum ">Products</strong>
+  <strong class="mt-6 mb-3 font-mediuum "><%= t('admin.labels.products') %></strong>
     <% order.order_products.each do |order_product| %>
     <div class="flex justify-between">
-      <strong class="">Name</strong>
+      <strong class=""><%= t('admin.labels.name') %></strong>
       <%= order_product.product.name %> 
     </div>
     <div class="flex justify-between">
-      <strong class="">Size</strong>
+      <strong class=""><%= t('admin.labels.size') %></strong>
       <%= order_product.size %>
     </div>      
     <div class="flex justify-between">
-      <strong class="">Quantity</strong>
+      <strong class=""><%= t('admin.labels.quantity') %></strong>
       <%= order_product.quantity %>
     </div>
     <% end %>

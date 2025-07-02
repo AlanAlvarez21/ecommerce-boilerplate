@@ -6,10 +6,10 @@
   <% content_for :title, "Stocks" %>
 
   <div class="flex items-center justify-between">
-    <h1 class="text-4xl font-bold">Stocks</h1>
+    <h1 class="text-4xl font-bold"><%= t('admin.stocks.title') %></h1>
     <div class="flex gap-4">
-      <%= link_to "Back to product", admin_product_path(params[:product_id]), class: "rounded-lg py-3 px-5 bg-gray-200 text-black font-medium" %>
-      <%= link_to "New stock", new_admin_product_stock_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+      <%= link_to t('admin.common.back_to', resource: 'product'), admin_product_path(params[:product_id]), class: "rounded-lg py-3 px-5 bg-gray-200 text-black font-medium" %>
+      <%= link_to t('admin.common.new', resource: 'stock'), new_admin_product_stock_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
     </div>
   </div>
 
@@ -17,7 +17,7 @@
     <% @admin_stocks.each do |admin_stock| %>
       <%= render admin_stock %>
       <p>
-        <%= link_to "Show this stock", admin_product_stock_path(admin_stock.product_id, admin_stock.id), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+        <%= link_to t('admin.common.show_this', resource: 'stock'), admin_product_stock_path(admin_stock.product_id, admin_stock.id), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
       </p>
     <% end %>
   </div>

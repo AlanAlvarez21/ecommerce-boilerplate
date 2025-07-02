@@ -9,7 +9,7 @@
       <div class="flex flex-col items-center justify-between gap-8 mb-4 md:flex-row md:items-center">
         <div>
           <h2 class="block mt-12 text-xl font-semibold text-center text-blue-gray-900 md:text-left">
-            Resumen de Ventas
+            <%= t('admin.dashboard.sales_summary') %>
           </h2>
         </div>
       </div>
@@ -17,13 +17,13 @@
 
     <!-- Tabla de Estadísticas Rápidas -->
     <div class="px-4 overflow-auto">
-      <h2 class="mb-4 text-2xl font-medium text-gray-800">Status del día</h2>
+      <h2 class="mb-4 text-2xl font-medium text-gray-800"><%= t('admin.dashboard.daily_status') %></h2>
       <div class="grid w-full gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <% stats = [
-          { title: "Ganancias", value: @quick_stats[:revenue] ? number_to_currency(@quick_stats[:revenue]) : '$0.00' },
-          { title: "Ventas totales", value: @quick_stats[:sales] ? number_to_currency(@quick_stats[:sales]) : '$0.00' },
-          { title: "Venta promedio", value: @quick_stats[:avg_sale] ? number_to_currency(@quick_stats[:avg_sale]) : '$0.00' },
-          { title: "Items/Venta", value: @quick_stats[:per_sale].to_i }
+          { title: t('admin.dashboard.revenue'), value: @quick_stats[:revenue] ? number_to_currency(@quick_stats[:revenue]) : '$0.00' },
+          { title: t('admin.dashboard.total_sales'), value: @quick_stats[:sales] ? number_to_currency(@quick_stats[:sales]) : '$0.00' },
+          { title: t('admin.dashboard.avg_sale'), value: @quick_stats[:avg_sale] ? number_to_currency(@quick_stats[:avg_sale]) : '$0.00' },
+          { title: t('admin.dashboard.items_per_sale'), value: @quick_stats[:per_sale].to_i }
         ] %>
         <% stats.each do |stat| %>
           <div class="relative flex flex-col w-full bg-white border rounded-lg shadow-sm border-slate-200">
@@ -37,7 +37,7 @@
                 <%= stat[:value] %>
               </p>
               <p class="font-light leading-normal text-slate-600">
-                Datos relevantes sobre <%= stat[:title] %>.
+                <%= t('admin.dashboard.relevant_data') %> <%= stat[:title] %>.
               </p>
             </div>
           </div>
@@ -50,7 +50,7 @@
       <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white rounded-none bg-clip-border">
         <div class="flex flex-col items-center justify-between gap-8 mb-4 md:flex-row md:items-center">
           <h2 class="block text-xl font-semibold text-center text-blue-gray-900 md:text-left md:mt-12">
-            Ordenes Recientes No Cumplidas
+            <%= t('admin.dashboard.recent_orders') %>
           </h2>
         </div>
       </div>
@@ -59,9 +59,9 @@
         <table class="w-full mx-auto text-left table-auto min-w-max">
           <thead>
             <tr class="table-header">
-              <th class="p-4 border-y">Cliente</th>
-              <th class="p-4 border-y">Fecha</th>
-              <th class="p-4 border-y">Total</th>
+              <th class="p-4 border-y"><%= t('admin.dashboard.customer') %></th>
+              <th class="p-4 border-y"><%= t('admin.dashboard.date') %></th>
+              <th class="p-4 border-y"><%= t('admin.dashboard.total') %></th>
             </tr>
           </thead>
           <tbody>
@@ -80,7 +80,7 @@
 
     <!-- Tabla de Ganancias -->
     <div class="w-full px-6 mx-auto my-12 align-middle" style="max-width: 85%">
-      <h2 class="text-2xl font-medium text-gray-800 ">Ganancias</h2>
+      <h2 class="text-2xl font-medium text-gray-800 "><%= t('admin.dashboard.revenue') %></h2>
       <div class="relative w-full" data-controller="dashboard" data-dashboard-revenue-value="<%= @revenue_by_day.to_json %>">
         <canvas id="revenueChart"></canvas>
       </div>

@@ -1,32 +1,32 @@
 <div id="<%= dom_id product %>">
   <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
+    <strong class="block font-medium mb-1"><%= t('admin.labels.name') %>:</strong>
     <%= product.name %>
   </p>
 
   <p class="my-5">
-    <strong class="block font-medium mb-1">Description:</strong>
+    <strong class="block font-medium mb-1"><%= t('admin.labels.description') %>:</strong>
     <%= product.description %>
   </p>
 
   <p class="my-5">
-    <strong class="block font-medium mb-1">Price:</strong>
+    <strong class="block font-medium mb-1"><%= t('admin.labels.price') %>:</strong>
     <%= product.price %>
   </p>
 
   <p class="my-5">
-    <strong class="block font-medium mb-1">Active: </strong>
+    <strong class="block font-medium mb-1"><%= t('admin.labels.active') %>: </strong>
     <%= product.active %>
   </p>
 
   <p class="my-5">
-    <strong class="block font-medium mb-1">Category:</strong>
+    <strong class="block font-medium mb-1"><%= t('admin.labels.category') %>:</strong>
 
     <%= product.category.name %>
   </p>
 
     <div class="my-5">
-    <strong class="block font-medium mb-1">Images:</strong>
+    <strong class="block font-medium mb-1"><%= t('admin.labels.images') %>:</strong>
     <% if product.images.any? %>
       <% product.images.each do |image| %>
         <%= image_tag image, class: "w-20 h-20 object-cover rounded-md" %>

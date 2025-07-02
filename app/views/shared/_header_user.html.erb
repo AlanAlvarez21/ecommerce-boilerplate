@@ -10,17 +10,17 @@
         </div>
         <div data-header-target="mobileMenu" class="hidden mt-4 md:flex md:items-center md:justify-between md:mt-0">
            <ul class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-4">
-                <%= link_to "Inicio", root_path, class: "block hover:text-gray-300" %>
-                <%= link_to "Catalogo", root_path, class: "block hover:text-gray-300" %>
-                <%= link_to "Sobre Nosotros", root_path, class: "block hover:text-gray-300" %>
-                <%= link_to "Contacto", root_path, class: "block hover:text-gray-300" %>
+                <%= link_to t('navigation.home'), root_path, class: "block hover:text-gray-300" %>
+                <%= link_to t('navigation.catalog'), root_path, class: "block hover:text-gray-300" %>
+                <%= link_to t('navigation.about'), root_path, class: "block hover:text-gray-300" %>
+                <%= link_to t('navigation.contact'), root_path, class: "block hover:text-gray-300" %>
             </ul>
             <div class="flex items-center mt-4 space-x-4 md:mt-0">
                 <%= link_to cart_path, class: 'relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' do %>
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
-                    <span class="sr-only">Carrito</span>
+                    <span class="sr-only"><%= t('navigation.cart') %></span>
                     <!-- Contador dinámico -->
                     <div 
                         data-header-target="cartCount"
@@ -32,7 +32,7 @@
                 <% end %>
                 
                 <div class="flex w-full gap-2 shrink-0 md:w-max">
-                    <%= link_to "Iniciar Sesión", '#', class: "flex select-none items-center gap-3 rounded-lg bg-yellow-500 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" %>
+                    <%= link_to t('navigation.login'), '#', class: "flex select-none items-center gap-3 rounded-lg bg-yellow-500 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" %>
                 </div>
             </div>
         </div>

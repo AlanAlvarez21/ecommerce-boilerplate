@@ -16,7 +16,7 @@ class CheckoutsController < ApplicationController
       product_stock = product.stocks.find { |stock| stock.size == item["size"] }
       
       if product_stock.amount < item["quantity"].to_i
-        render json: { error: "Not enough stock for #{product.name} in size #{item["size"]}. Only #{product_stock.amount} left." }, status: 400
+        render json: { error: t('checkout.stock_error', product: product.name, size: item["size"], amount: product_stock.amount) }, status: 400
         return
       end
 
@@ -44,12 +44,12 @@ class CheckoutsController < ApplicationController
       if payment_url.present?
         redirect_to payment_url, allow_other_host: true
       else
-        redirect_to cart_path, alert: "No se pudo generar la URL de pago"
+        redirect_to cart_path, alert: t('checkout.payment_url_error')
       end
       
     rescue => e
       puts "Error: #{e.message}" # Debug temporal
-      redirect_to cart_path, alert: "Error en el proceso de pago: #{e.message}"
+      redirect_to cart_path, alert: "#{t('checkout.payment_error')}: #{e.message}"
     end
   end
 

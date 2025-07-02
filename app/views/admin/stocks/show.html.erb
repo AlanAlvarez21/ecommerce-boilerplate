@@ -6,10 +6,10 @@
 
     <%= render @admin_stock %>
 
-    <%= link_to "Edit this stock", edit_admin_product_stock_path(@admin_stock.product, @admin_stock), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to "Back to stocks", admin_product_stocks_path(@admin_stock.product, @admin_stock), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to t('admin.common.edit_this', resource: 'stock'), edit_admin_product_stock_path(@admin_stock.product, @admin_stock), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to t('admin.common.back_to', resource: 'stocks'), admin_product_stocks_path(@admin_stock.product, @admin_stock), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <div class="inline-block ml-2">
-      <%= button_to "Destroy this stock", admin_product_stock_path(@admin_stock), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+      <%= button_to t('admin.common.destroy_this', resource: 'stock'), admin_product_stock_path(@admin_stock), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
     </div>
   </div>
 </div>

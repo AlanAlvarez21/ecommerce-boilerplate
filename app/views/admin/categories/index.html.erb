@@ -14,11 +14,11 @@
         <div class="flex flex-col items-center gap-8 px-4 mb-4 md:flex-row md:items-center md:justify-between">
           <div>
             <h1 class="mt-12 font-sans text-xl font-semibold leading-snug tracking-normal text-center md:text-left text-blue-gray-900">
-              Categorías
+              <%= t('admin.categories.title') %>
             </h1>
           </div>
           <div class="flex justify-center gap-2 shrink-0 md:w-auto">
-            <%= link_to "Nueva Categoría", new_admin_category_path, class: "flex items-center gap-3 rounded-lg bg-yellow-500 py-2 px-4 text-white font-bold shadow-md hover:shadow-lg focus:opacity-85 active:opacity-85 mt-12" %>
+            <%= link_to t('admin.categories.new_category'), new_admin_category_path, class: "flex items-center gap-3 rounded-lg bg-yellow-500 py-2 px-4 text-white font-bold shadow-md hover:shadow-lg focus:opacity-85 active:opacity-85 mt-12" %>
           </div>
         </div>
       </div>

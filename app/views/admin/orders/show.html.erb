@@ -6,14 +6,14 @@
 
     <%= render @admin_order %>
       <div class="mt-8">
-      <%= link_to "Edit this order", edit_admin_order_path(@admin_order), 
+      <%= link_to t('admin.common.edit_this', resource: 'order'), edit_admin_order_path(@admin_order), 
           class: "rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2" %>
 
-      <%= link_to "Back to orders", admin_orders_path, 
+      <%= link_to t('admin.common.back_to', resource: 'orders'), admin_orders_path, 
           class: "rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2" %>
 
       <div class="inline-block ml-2">
-        <%= button_to "Destroy this order", [:admin, @admin_order], method: :delete, 
+        <%= button_to t('admin.common.destroy_this', resource: 'order'), [:admin, @admin_order], method: :delete, 
             class: "rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2" %>
       </div>
     </div>

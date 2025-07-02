@@ -1,16 +1,16 @@
 <div id="<%= dom_id category %>">
   <p class="border border-slate-300 p-3 text-left bg-slate-50">
-    <strong class="block font-medium mb-1">Name:</strong>
+    <strong class="block font-medium mb-1"><%= t('admin.labels.name') %>:</strong>
     <%= category.name %>
   </p>
 
   <p class="border border-slate-300 p-3 text-left bg-slate-50">
-    <strong class="block font-medium mb-1">Description:</strong>
+    <strong class="block font-medium mb-1"><%= t('admin.labels.description') %>:</strong>
     <%= category.description %>
   </p>
 
   <p class="my-5">
-    <strong class="block font-medium mb-1">Image:</strong>
+    <strong class="block font-medium mb-1"><%= t('admin.labels.image') %>:</strong>
       <%= image_tag(category.image) if category.image.present? %>
       <%= image_tag(category.image_url) if category.image_url.present? %>
   </p>

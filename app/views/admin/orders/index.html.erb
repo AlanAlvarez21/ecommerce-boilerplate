@@ -9,7 +9,7 @@
     <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white rounded-none bg-clip-border">
       <div class="flex flex-col items-center justify-between gap-8 mb-4 md:flex-row md:items-center">
         <h2 class="block text-xl font-semibold text-center text-blue-gray-900 md:text-left md:mt-12">
-          Misc
+          <%= t('admin.orders.misc') %>
         </h2>
       </div>
     </div>
@@ -24,9 +24,9 @@
     <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white rounded-none bg-clip-border">
       <div class="flex flex-col items-center justify-between gap-8 mb-4 md:flex-row md:items-center">
         <h2 class="block text-xl font-semibold text-center text-blue-gray-900 md:text-left md:mt-12">
-          Ordenes Pagadas
+          <%= t('admin.orders.paid_orders') %>
         </h2>
-        <%= link_to "Nueva Orden", new_admin_order_path, class: "flex items-center gap-3 rounded-lg bg-gray-900 py-2 px-4 text-white font-bold uppercase shadow-md hover:shadow-lg focus:opacity-85 active:opacity-85" %>
+        <%= link_to t('admin.orders.new_order'), new_admin_order_path, class: "flex items-center gap-3 rounded-lg bg-gray-900 py-2 px-4 text-white font-bold uppercase shadow-md hover:shadow-lg focus:opacity-85 active:opacity-85" %>
       </div>
     </div>
 
@@ -34,11 +34,11 @@
       <table class="w-full mx-auto text-left table-auto min-w-max">
         <thead>
           <tr class="table-header">
-            <th class="p-4 border-y">Order</th>
-            <th class="p-4 border-y">Fulfilled</th>
-            <th class="p-4 border-y">Date</th>
-            <th class="p-4 border-y">Total</th>
-            <th class="p-4 border-y">Edit</th>
+            <th class="p-4 border-y"><%= t('admin.orders.order') %></th>
+            <th class="p-4 border-y"><%= t('admin.orders.fulfilled') %></th>
+            <th class="p-4 border-y"><%= t('admin.orders.date') %></th>
+            <th class="p-4 border-y"><%= t('admin.dashboard.total') %></th>
+            <th class="p-4 border-y"><%= t('admin.orders.edit') %></th>
           </tr>
         </thead>
         <tbody>
@@ -74,7 +74,7 @@
     <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white rounded-none bg-clip-border">
       <div class="flex flex-col items-center justify-between gap-8 mb-4 md:flex-row md:items-center">
         <h2 class="block text-xl font-semibold text-center text-blue-gray-900 md:text-left md:mt-12">
-          Órdenes No Pagadas
+          <%= t('admin.orders.unpaid_orders') %>
         </h2>
       </div>
     </div>
@@ -83,11 +83,11 @@
       <table class="w-full mx-auto text-left table-auto min-w-max">
         <thead>
           <tr class="table-header">
-            <th class="p-4 border-y">Order</th>
-            <th class="p-4 border-y">Fulfilled</th>
-            <th class="p-4 border-y">Date</th>
-            <th class="p-4 border-y">Total</th>
-            <th class="p-4 border-y">Edit</th>
+            <th class="p-4 border-y"><%= t('admin.orders.order') %></th>
+            <th class="p-4 border-y"><%= t('admin.orders.fulfilled') %></th>
+            <th class="p-4 border-y"><%= t('admin.orders.date') %></th>
+            <th class="p-4 border-y"><%= t('admin.dashboard.total') %></th>
+            <th class="p-4 border-y"><%= t('admin.orders.edit') %></th>
           </tr>
         </thead>
         <tbody>

@@ -3,7 +3,7 @@
   <%= form_with(model: [:admin, @product, admin_stock], class: "contents") do |form| %>
   <% if admin_stock.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(admin_stock.errors.count, "error") %> prohibited this admin_stock from being saved:</h2>
+      <h2><%= t('admin.common.error_count', count: admin_stock.errors.count, resource: 'admin_stock') %></h2>
 
       <ul>
         <% admin_stock.errors.each do |error| %>

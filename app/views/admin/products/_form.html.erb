@@ -1,7 +1,7 @@
 <%= form_with(model: [:admin, admin_product], class: "contents") do |form| %>
   <% if admin_product.errors.any? %>
     <div id="error_explanation" class="px-3 py-2 mt-3 font-medium text-red-500 rounded-lg bg-red-50">
-      <h2><%= pluralize(admin_product.errors.count, "error") %> prohibited this admin_product from being saved:</h2>
+      <h2><%= t('admin.common.error_count', count: admin_product.errors.count, resource: 'admin_product') %></h2>
 
       <ul>
         <% admin_product.errors.each do |error| %>
@@ -33,13 +33,13 @@
 
   <div class="my-5">
     <%= form.label :category_id %>
-    <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: "Select Category" },
+    <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: t('admin.common.select_category') },
       class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <% if admin_product.persisted? %>
     <div class="my-5">
-      <%= link_to "Product Stock", admin_product_stocks_path(admin_product), class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+      <%= link_to t('admin.common.product_stock'), admin_product_stocks_path(admin_product), class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
     </div>
   <% end %>
 

@@ -1,7 +1,7 @@
 <div class="mx-auto md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">Editing category</h1>
+  <h1 class="font-bold text-4xl"><%= t('admin.common.editing', resource: 'category') %></h1>
 
   <%= render "form", category: @category %>
-  <%= link_to "Show this category", [:admin, @category], class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-  <%= link_to "Back to categories", admin_categories_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  <%= link_to t('admin.common.show_this', resource: 'category'), [:admin, @category], class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  <%= link_to t('admin.common.back_to', resource: 'categories'), admin_categories_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
 </div>

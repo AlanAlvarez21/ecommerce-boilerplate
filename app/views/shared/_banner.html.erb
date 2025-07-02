@@ -6,7 +6,7 @@
           <div class="flex items-center space-x-4 text-sm text-white min-w-[250px]">
             <strong class="mr-2"><%= coin.name %>:</strong>
             <span class="flex items-center">
-              Compra: $<%= number_with_precision(coin.purchase_price, precision: 2) %>
+              <%= t('coins_card.buy') %>: $<%= number_with_precision(coin.purchase_price, precision: 2) %>
               <% if coin.purchase_price_changed? %>
                 <% if coin.purchase_price > coin.purchase_price_was %>
                   <span class="ml-1 text-green-500">▲</span>
@@ -17,7 +17,7 @@
             </span>
             <span class="mx-2 text-gray-400">|</span>
             <span class="flex items-center">
-              Venta: $<%= number_with_precision(coin.selling_price, precision: 2) %>
+              <%= t('coins_card.sell') %>: $<%= number_with_precision(coin.selling_price, precision: 2) %>
               <% if coin.selling_price_changed? %>
                 <% if coin.selling_price > coin.selling_price_was %>
                   <span class="ml-1 text-green-500">▲</span>
@@ -33,7 +33,7 @@
           <div class="flex items-center space-x-4 text-sm text-white min-w-[250px]">
             <strong class="mr-2"><%= coin.name %>:</strong>
             <span class="flex items-center">
-              Compra: $<%= number_with_precision(coin.purchase_price, precision: 2) %>
+              <%= t('coins_card.buy') %>: $<%= number_with_precision(coin.purchase_price, precision: 2) %>
               <% if coin.purchase_price_changed? %>
                 <% if coin.purchase_price > coin.purchase_price_was %>
                   <span class="ml-1 text-green-500">▲</span>
@@ -44,7 +44,7 @@
             </span>
             <span class="mx-2 text-gray-400">|</span>
             <span class="flex items-center">
-              Venta: $<%= number_with_precision(coin.selling_price, precision: 2) %>
+              <%= t('coins_card.sell') %>: $<%= number_with_precision(coin.selling_price, precision: 2) %>
               <% if coin.selling_price_changed? %>
                 <% if coin.selling_price > coin.selling_price_was %>
                   <span class="ml-1 text-green-500">▲</span>
@@ -58,6 +58,6 @@
       </div>
     </div>
   <% else %>
-    <div class="text-sm text-white">Cargando precios...</div>
+    <div class="text-sm text-white"><%= t('coins_card.loading_prices') %></div>
   <% end %>
 </div>

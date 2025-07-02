@@ -2,9 +2,9 @@
   <main class="container flex-grow px-4 py-8 mx-auto">
     <!-- Hero Section -->
     <section class="py-20 text-center text-slate-800">
-      <h1 class="mb-4 text-5xl font-bold tracking-tight">Bienvenido a CoinMex</h1>
-      <p class="mb-8 text-xl text-slate-600">Descubre nuestra colección única de monedas raras y valiosas.</p>
-      <%= link_to "Comprar Ahora", root_path, class: "inline-block px-8 py-4 text-lg font-semibold text-white transition duration-300 bg-emerald-600 rounded-full hover:bg-emerald-700" %>
+      <h1 class="mb-4 text-5xl font-bold tracking-tight"><%= t('home.hero.title') %></h1>
+      <p class="mb-8 text-xl text-slate-600"><%= t('home.hero.subtitle') %></p>
+      <%= link_to t('home.hero.buy_now'), root_path, class: "inline-block px-8 py-4 text-lg font-semibold text-white transition duration-300 bg-emerald-600 rounded-full hover:bg-emerald-700" %>
     </section>
 
     <!-- Coins Price Card -->
@@ -43,7 +43,7 @@
 
     <!-- Popular Coins -->
     <section class="mb-16">
-      <h2 class="mb-8 text-3xl font-bold tracking-tight text-slate-800">Monedas Populares</h2>
+      <h2 class="mb-8 text-3xl font-bold tracking-tight text-slate-800"><%= t('home.popular_coins.title') %></h2>
       <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
         <% @products.each do |product| %>
           <div class="flex flex-col overflow-hidden transition duration-300 bg-white rounded-lg shadow-sm hover:shadow-md">
@@ -60,12 +60,12 @@
                 <p class="mb-4 text-sm text-center text-slate-600"><%= product.description %></p>
               </div>
               <div class="flex flex-col space-y-2">
-                <%= link_to 'Ver Detalles', product_path(product), 
+                <%= link_to t('home.popular_coins.view_details'), product_path(product), 
                   class: "w-full px-4 py-2 text-sm font-medium text-center text-white transition duration-300 bg-emerald-600 rounded-full hover:bg-emerald-700" %>
                 <button 
                   class="w-full px-4 py-2 text-sm font-medium text-center transition duration-300 rounded-full text-emerald-700 bg-emerald-100 hover:bg-emerald-200 disabled:opacity-50 disabled:cursor-not-allowed"
                   <%= product.active ? '' : 'disabled' %>>
-                  <%= product.active ? "Añadir al Carrito" : "Producto no disponible" %>
+                  <%= product.active ? t('home.popular_coins.add_to_cart') : t('home.popular_coins.not_available') %>
                 </button>
               </div>
             </div>
@@ -76,7 +76,7 @@
 
     <!-- Categories -->
     <section>
-      <h2 class="mb-8 text-3xl font-bold tracking-tight text-slate-800">Categorías</h2>
+      <h2 class="mb-8 text-3xl font-bold tracking-tight text-slate-800"><%= t('home.categories.title') %></h2>
       <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
         <% @main_categories.each do |category| %>
           <%= link_to category_path(category), class: "flex flex-col overflow-hidden transition duration-300 bg-white rounded-lg shadow-sm hover:shadow-md" do %>
@@ -92,10 +92,10 @@
                 <%= category.name %>
               </h3>
               <p class="mb-4 text-sm font-medium uppercase text-slate-500">
-                Explora más sobre esta categoría
+                <%= t('categories.explore_more') %>
               </p>
               <p class="text-base text-slate-600">
-                Encuentra lo mejor relacionado con <%= category.name %>.
+                <%= t('categories.find_best') %> <%= category.name %>.
               </p>
             </div>
           <% end %>
