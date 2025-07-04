@@ -47,6 +47,18 @@ gem "kaminari"
 
 gem "mercadopago-sdk"
 
+# Background jobs
+gem "sidekiq", "~> 7.0"
+
+# Rate limiting and security
+gem "rack-attack", "~> 6.6"
+
+# Money handling
+gem "money-rails", "~> 1.15"
+
+# Structured logging
+gem "ougai", "~> 2.0"
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
