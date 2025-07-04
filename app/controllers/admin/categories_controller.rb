@@ -25,7 +25,7 @@ class Admin::CategoriesController < AdminController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to admin_categories_path(@category), notice: t('admin.categories.created') }
+        format.html { redirect_to admin_categories_path(@category), notice: t("admin.categories.created") }
         format.json { render :show, status: :created, location: @category }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class Admin::CategoriesController < AdminController
   def update
     respond_to do |format|
       if @category.update(category_params)
-        format.html { redirect_to admin_categories_path(@category), notice: t('admin.categories.updated') }
+        format.html { redirect_to admin_categories_path(@category), notice: t("admin.categories.updated") }
         format.json { render :show, status: :ok, location: @category }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class Admin::CategoriesController < AdminController
     @category.destroy!
 
     respond_to do |format|
-      format.html { redirect_to admin_categories_path, status: :see_other, notice: t('admin.categories.deleted') }
+      format.html { redirect_to admin_categories_path, status: :see_other, notice: t("admin.categories.deleted") }
       format.json { head :no_content }
     end
   end

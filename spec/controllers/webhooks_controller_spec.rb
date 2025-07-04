@@ -3,12 +3,12 @@ require 'rails_helper'
 RSpec.describe WebhooksController, type: :controller do
   let(:product) { create(:product) }
   let(:stock) { create(:stock, product: product, amount: 10) }
-  
+
   describe "POST #mercadopago" do
     let(:payment_id) { "123456789" }
     let(:mock_sdk) { instance_double(Mercadopago::SDK) }
     let(:mock_payment_service) { instance_double("PaymentService") }
-    
+
     before do
       allow(Mercadopago::SDK).to receive(:new).and_return(mock_sdk)
       allow(mock_sdk).to receive(:payment).and_return(mock_payment_service)
@@ -59,7 +59,7 @@ RSpec.describe WebhooksController, type: :controller do
 
       it "creates order with correct attributes" do
         post :mercadopago, params: { data: { id: payment_id } }
-        
+
         order = Order.last
         expect(order.customer_email).to eq('customer@example.com')
         expect(order.total).to eq(150.0)
@@ -75,7 +75,7 @@ RSpec.describe WebhooksController, type: :controller do
 
       it "creates order product with correct attributes" do
         post :mercadopago, params: { data: { id: payment_id } }
-        
+
         order_product = OrderProduct.last
         expect(order_product.product_id).to eq(product.id)
         expect(order_product.quantity).to eq(2)
@@ -91,7 +91,7 @@ RSpec.describe WebhooksController, type: :controller do
       it "calls MercadoPago SDK with correct parameters" do
         expect(Mercadopago::SDK).to receive(:new).with('test_token')
         expect(mock_payment_service).to receive(:get).with(payment_id)
-        
+
         post :mercadopago, params: { data: { id: payment_id } }
       end
     end
@@ -210,7 +210,7 @@ RSpec.describe WebhooksController, type: :controller do
 
       it "decrements stock for all items" do
         post :mercadopago, params: { data: { id: payment_id } }
-        
+
         expect(stock.reload.amount).to eq(9)  # 10 - 1
         expect(stock2.reload.amount).to eq(2) # 5 - 3
       end

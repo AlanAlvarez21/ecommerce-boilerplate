@@ -4,7 +4,7 @@ RSpec.describe CheckoutsController, type: :controller do
   let(:product) { create(:product) }
   let(:stock) { create(:stock, product: product, size: "M", amount: 10) }
   let(:mercado_pago_service) { instance_double(MercadoPagoSdk) }
-  
+
   before do
     stock
     allow(MercadoPagoSdk).to receive(:new).and_return(mercado_pago_service)
@@ -63,7 +63,7 @@ RSpec.describe CheckoutsController, type: :controller do
         expect(mercado_pago_service).to receive(:create_preference)
           .with(expected_line_items, expected_user_info)
           .and_return("https://payment-url.com")
-        
+
         post :create, params: valid_cart_params
       end
     end

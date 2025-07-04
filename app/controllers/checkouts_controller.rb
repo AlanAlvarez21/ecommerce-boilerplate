@@ -1,15 +1,15 @@
 class CheckoutsController < ApplicationController
   include ApiResponses
-  
+
   def create
     cart_processor = CartProcessor.new(
       cart_data: params[:cart],
       user_info: user_info_params
     )
-    
+
     if cart_processor.valid?
       payment_url = cart_processor.payment_url
-      
+
       if payment_url.present?
         redirect_to payment_url, allow_other_host: true
       else
@@ -30,7 +30,7 @@ class CheckoutsController < ApplicationController
       external_reference: params[:external_reference],
       merchant_order_id: params[:merchant_order_id]
     }
-    
+
     render :success
   end
 
@@ -39,21 +39,21 @@ class CheckoutsController < ApplicationController
       payment_id: params[:payment_id],
       status: params[:status]
     }
-    
+
     render :failure
   end
-  
+
   def pending
     Rails.logger.info "Checkout pending", {
       payment_id: params[:payment_id],
       status: params[:status]
     }
-    
+
     render :pending
   end
-  
+
   private
-  
+
   def user_info_params
     {
       email: params[:email] || "test@example.com",

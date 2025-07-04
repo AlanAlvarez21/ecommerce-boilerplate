@@ -72,9 +72,9 @@ RSpec.describe Admin::ProductsController, type: :controller do
 
   describe "POST #create" do
     let(:valid_attributes) do
-      { 
-        name: "New Product", 
-        description: "Product description", 
+      {
+        name: "New Product",
+        description: "Product description",
         price: 99.99,
         category_id: category.id,
         active: true
@@ -127,8 +127,8 @@ RSpec.describe Admin::ProductsController, type: :controller do
 
       it "returns errors for invalid attributes" do
         allow_any_instance_of(Product).to receive(:save).and_return(false)
-        allow_any_instance_of(Product).to receive(:errors).and_return({ name: ["can't be blank"] })
-        
+        allow_any_instance_of(Product).to receive(:errors).and_return({ name: [ "can't be blank" ] })
+
         post :create, params: { product: invalid_attributes }, format: :json
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -137,8 +137,8 @@ RSpec.describe Admin::ProductsController, type: :controller do
 
   describe "PATCH #update" do
     let(:new_attributes) do
-      { 
-        name: "Updated Product", 
+      {
+        name: "Updated Product",
         description: "Updated description",
         price: 149.99
       }
@@ -188,7 +188,7 @@ RSpec.describe Admin::ProductsController, type: :controller do
 
     context "with image attachments" do
       let(:image_file) { fixture_file_upload('test_image.jpg', 'image/jpeg') }
-      let(:attributes_with_images) { new_attributes.merge(images: [image_file]) }
+      let(:attributes_with_images) { new_attributes.merge(images: [ image_file ]) }
 
       before do
         # Create a test image file fixture
@@ -268,14 +268,14 @@ RSpec.describe Admin::ProductsController, type: :controller do
             category_id: category.id,
             active: true,
             image_url: "http://example.com/test.jpg",
-            images: ["test1.jpg", "test2.jpg"],
+            images: [ "test1.jpg", "test2.jpg" ],
             forbidden_param: "not allowed"
           }
         )
-        
+
         controller.params = params
         permitted_params = controller.send(:admin_product_params)
-        
+
         expect(permitted_params.permitted?).to be true
         expect(permitted_params.keys).to match_array(%w[name description price category_id active image_url images])
       end

@@ -21,7 +21,7 @@ RSpec.describe Admin::RegistrationsController, type: :controller do
 
       it "permits name and address for sign up" do
         post :create, params: valid_params
-        
+
         # Verify the admin was created with the correct attributes
         admin = Admin.last
         expect(admin.name).to eq("Admin User")
@@ -30,7 +30,7 @@ RSpec.describe Admin::RegistrationsController, type: :controller do
 
       it "calls configure_sign_up_params before create" do
         expect(controller).to receive(:configure_sign_up_params).and_call_original
-        
+
         post :create, params: valid_params
       end
     end
@@ -55,7 +55,7 @@ RSpec.describe Admin::RegistrationsController, type: :controller do
       it "permits name and address for account update" do
         sign_in admin
         patch :update, params: update_params
-        
+
         # Verify the admin was updated with the correct attributes
         admin.reload
         expect(admin.name).to eq("Updated Name")
@@ -64,7 +64,7 @@ RSpec.describe Admin::RegistrationsController, type: :controller do
 
       it "calls configure_account_update_params before update" do
         expect(controller).to receive(:configure_account_update_params).and_call_original
-        
+
         patch :update, params: update_params
       end
     end

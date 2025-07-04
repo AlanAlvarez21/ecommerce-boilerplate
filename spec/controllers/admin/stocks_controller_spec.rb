@@ -32,9 +32,9 @@ RSpec.describe Admin::StocksController, type: :controller do
     it "orders stocks by created_at desc" do
       old_stock = create(:stock, product: product, created_at: 1.day.ago)
       new_stock = create(:stock, product: product, created_at: 1.hour.ago)
-      
+
       get :index, params: { product_id: product.id }
-      
+
       stocks_in_order = assigns(:admin_stocks).to_a
       expect(stocks_in_order.first.created_at).to be > stocks_in_order.last.created_at
     end
@@ -158,8 +158,8 @@ RSpec.describe Admin::StocksController, type: :controller do
 
       it "returns errors for invalid attributes" do
         allow_any_instance_of(Stock).to receive(:save).and_return(false)
-        allow_any_instance_of(Stock).to receive(:errors).and_return({ amount: ["can't be blank"] })
-        
+        allow_any_instance_of(Stock).to receive(:errors).and_return({ amount: [ "can't be blank" ] })
+
         post :create, params: { product_id: product.id, stock: invalid_attributes }, format: :json
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -273,10 +273,10 @@ RSpec.describe Admin::StocksController, type: :controller do
             forbidden_param: "not allowed"
           }
         )
-        
+
         controller.params = params
         permitted_params = controller.send(:stock_params)
-        
+
         expect(permitted_params.permitted?).to be true
         expect(permitted_params.keys).to match_array(%w[amount size])
       end

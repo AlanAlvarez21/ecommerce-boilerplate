@@ -43,7 +43,7 @@ RSpec.configure do |config|
   config.before(:each) do
     I18n.locale = :en  # Use English for consistent test messages
   end
-  
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')
@@ -53,24 +53,24 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
-  
+
   # Include FactoryBot methods
   config.include FactoryBot::Syntax::Methods
-  
+
   # Include Devise test helpers for controller specs
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
-  
+
   # Include Rails controller testing helpers
   config.include Rails::Controller::Testing::TestProcess, type: :controller
   config.include Rails::Controller::Testing::TemplateAssertions, type: :controller
   config.include Rails::Controller::Testing::Integration, type: :controller
-  
+
   # Configure Devise for testing
   config.before(:each, type: :controller) do
     @request.env["devise.mapping"] = Devise.mappings[:admin] if @request
   end
-  
+
   # Add custom sign_in and sign_out methods for Admin model
   config.include Module.new {
     def sign_in(resource, deprecated = nil, scope: nil)
@@ -80,7 +80,7 @@ RSpec.configure do |config|
       end
       super(resource, deprecated, scope: scope)
     end
-    
+
     def sign_out(resource_or_scope = nil)
       if resource_or_scope.is_a?(Admin)
         scope = :admin

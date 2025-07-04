@@ -118,8 +118,8 @@ RSpec.describe Admin::CategoriesController, type: :controller do
 
       it "returns errors for invalid attributes" do
         allow_any_instance_of(Category).to receive(:save).and_return(false)
-        allow_any_instance_of(Category).to receive(:errors).and_return({ name: ["can't be blank"] })
-        
+        allow_any_instance_of(Category).to receive(:errors).and_return({ name: [ "can't be blank" ] })
+
         post :create, params: { category: invalid_attributes }, format: :json
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -236,10 +236,10 @@ RSpec.describe Admin::CategoriesController, type: :controller do
             forbidden_param: "not allowed"
           }
         )
-        
+
         controller.params = params
         permitted_params = controller.send(:category_params)
-        
+
         expect(permitted_params.permitted?).to be true
         expect(permitted_params.keys).to match_array(%w[name description image image_url])
       end

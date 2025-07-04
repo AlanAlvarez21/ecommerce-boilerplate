@@ -24,7 +24,7 @@ RSpec.describe Admin::OrdersController, type: :controller do
 
     it "assigns fulfilled orders" do
       get :index
-      
+
       expect(assigns(:admin_orders)).to be_present
       expect(assigns(:not_fulfilled_orders)).to be_present
     end
@@ -89,7 +89,7 @@ RSpec.describe Admin::OrdersController, type: :controller do
 
   describe "POST #create" do
     let(:valid_attributes) do
-      { 
+      {
         customer_email: "customer@example.com",
         total: 150.0,
         address: "123 Main St",
@@ -143,8 +143,8 @@ RSpec.describe Admin::OrdersController, type: :controller do
 
       it "returns errors for invalid attributes" do
         allow_any_instance_of(Order).to receive(:save).and_return(false)
-        allow_any_instance_of(Order).to receive(:errors).and_return({ customer_email: ["can't be blank"] })
-        
+        allow_any_instance_of(Order).to receive(:errors).and_return({ customer_email: [ "can't be blank" ] })
+
         post :create, params: { order: invalid_attributes }, format: :json
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -153,7 +153,7 @@ RSpec.describe Admin::OrdersController, type: :controller do
 
   describe "PATCH #update" do
     let(:new_attributes) do
-      { 
+      {
         customer_email: "updated@example.com",
         total: 200.0,
         fulfilled: true
@@ -267,10 +267,10 @@ RSpec.describe Admin::OrdersController, type: :controller do
             forbidden_param: "not allowed"
           }
         )
-        
+
         controller.params = params
         permitted_params = controller.send(:order_params)
-        
+
         expect(permitted_params.permitted?).to be true
         expect(permitted_params.keys).to match_array(%w[customer_email fulfilled total address])
       end

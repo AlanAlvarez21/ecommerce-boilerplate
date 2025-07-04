@@ -20,15 +20,15 @@ module CoinsEcommerceApp
     config.i18n.available_locales = [ :en, :es ]
     config.i18n.default_locale = :es
     config.hosts << "pv5g5qjk-3000.usw3.devtunnels.ms"
-    
+
     # Add Rack::Attack middleware
     config.middleware.use Rack::Attack
-    
+
     # Configure timezone
-    config.time_zone = 'America/Mexico_City'
-    
+    config.time_zone = "America/Mexico_City"
+
     # Add app version
-    config.version = ENV.fetch('APP_VERSION', '1.0.0')
+    config.version = ENV.fetch("APP_VERSION", "1.0.0")
 
     # Configuration for the application, engines, and railties goes here.
     #

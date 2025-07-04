@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   root "home#index"
 
   # Health checks (should be at the top for monitoring)
-  get '/health', to: 'health#check'
-  get '/health/liveness', to: 'health#liveness'
-  get '/health/readiness', to: 'health#readiness'
+  get "/health", to: "health#check"
+  get "/health/liveness", to: "health#liveness"
+  get "/health/readiness", to: "health#readiness"
 
   devise_for :admins, controllers: {
     registrations: "admin/registrations"
@@ -22,19 +22,19 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :categories, only: [ :show ]     
+  resources :categories, only: [ :show ]
 
   get "admin" => "admin#index"
   get "cart" => "cart#show"
   get "precios", to: "prices#index"
 
-  
-  post "webhooks/mercadopago" => 'webhooks#mercadopago'
-  
-  post '/checkout', to: 'checkouts#create'
-  get '/checkout/success', to: 'checkouts#success'
-  get '/checkout/failure', to: 'checkouts#failure'  
-  get '/checkout/pending', to: 'checkouts#pending'
+
+  post "webhooks/mercadopago" => "webhooks#mercadopago"
+
+  post "/checkout", to: "checkouts#create"
+  get "/checkout/success", to: "checkouts#success"
+  get "/checkout/failure", to: "checkouts#failure"
+  get "/checkout/pending", to: "checkouts#pending"
 
   resources :products, only: [ :show ]
   resources :templates

@@ -27,14 +27,14 @@ RSpec.describe 'Checkouts', type: :request do
 
       it 'creates a new order successfully' do
         post '/checkout', params: checkout_params
-        
+
         expect(response).to have_http_status(:redirect)
         expect(response).to redirect_to('/checkout/success')
       end
 
       it 'processes checkout with CartProcessor' do
         expect(CartProcessor).to receive(:process_checkout).with(checkout_params)
-        
+
         post '/checkout', params: checkout_params
       end
     end
@@ -50,13 +50,13 @@ RSpec.describe 'Checkouts', type: :request do
 
       before do
         allow(CartProcessor).to receive(:process_checkout).and_return(
-          double(success?: false, errors: ['Invalid email format', 'Address is required'])
+          double(success?: false, errors: [ 'Invalid email format', 'Address is required' ])
         )
       end
 
       it 'returns validation errors' do
         post '/checkout', params: invalid_params
-        
+
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.body).to include('Invalid email format')
         expect(response.body).to include('Address is required')
@@ -81,13 +81,13 @@ RSpec.describe 'Checkouts', type: :request do
 
       before do
         allow(CartProcessor).to receive(:process_checkout).and_return(
-          double(success?: false, errors: ['Insufficient stock for product'])
+          double(success?: false, errors: [ 'Insufficient stock for product' ])
         )
       end
 
       it 'handles insufficient stock gracefully' do
         post '/checkout', params: insufficient_stock_params
-        
+
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.body).to include('Insufficient stock')
       end
@@ -114,7 +114,7 @@ RSpec.describe 'Checkouts', type: :request do
 
       it 'redirects to MercadoPago for payment' do
         post '/checkout', params: checkout_params
-        
+
         expect(response).to have_http_status(:redirect)
         expect(response.location).to include('mercadopago.com')
       end
@@ -123,14 +123,14 @@ RSpec.describe 'Checkouts', type: :request do
 
   describe 'GET /checkout/success' do
     let(:order) { create(:order, :processing, payment_id: 'MP-12345') }
-    
+
     before do
       session[:last_order_id] = order.id
     end
 
     it 'displays success page' do
       get '/checkout/success'
-      
+
       expect(response).to have_http_status(:success)
       expect(response.body).to include('Thank you for your order')
       expect(response.body).to include(order.customer_email)
@@ -138,7 +138,7 @@ RSpec.describe 'Checkouts', type: :request do
 
     it 'clears the order from session' do
       get '/checkout/success'
-      
+
       expect(session[:last_order_id]).to be_nil
     end
   end
@@ -146,7 +146,7 @@ RSpec.describe 'Checkouts', type: :request do
   describe 'GET /checkout/failure' do
     it 'displays failure page' do
       get '/checkout/failure'
-      
+
       expect(response).to have_http_status(:success)
       expect(response.body).to include('Payment failed')
       expect(response.body).to include('Try again')
@@ -156,7 +156,7 @@ RSpec.describe 'Checkouts', type: :request do
   describe 'GET /checkout/pending' do
     it 'displays pending page' do
       get '/checkout/pending'
-      
+
       expect(response).to have_http_status(:success)
       expect(response.body).to include('Payment pending')
       expect(response.body).to include('We will notify you')
@@ -179,7 +179,7 @@ RSpec.describe 'Checkouts', type: :request do
 
     it 'calculates total correctly for multiple products' do
       expected_total = expensive_product.price + (cheap_product.price * 3)
-      
+
       allow(CartProcessor).to receive(:process_checkout).and_return(
         double(
           success?: true,
@@ -189,7 +189,7 @@ RSpec.describe 'Checkouts', type: :request do
       )
 
       post '/checkout', params: multi_product_params
-      
+
       expect(CartProcessor).to have_received(:process_checkout).with(multi_product_params)
     end
   end

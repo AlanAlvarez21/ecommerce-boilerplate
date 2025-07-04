@@ -11,7 +11,7 @@ RSpec.describe AdminController, type: :controller do
     let!(:fulfilled_order) { create(:order, fulfilled: true, total: 100, created_at: 1.day.ago) }
     let!(:unfulfilled_orders) { create_list(:order, 7, fulfilled: false, total: 50, created_at: 1.day.ago) }
     let!(:today_orders) { create_list(:order, 3, fulfilled: true, total: 75, created_at: 30.minutes.ago) }
-    
+
     before do
       # Create order products for per_sale calculation
       today_orders.each do |order|
@@ -37,7 +37,7 @@ RSpec.describe AdminController, type: :controller do
 
     it "calculates quick stats for today" do
       get :index
-      
+
       quick_stats = assigns(:quick_stats)
       expect(quick_stats[:sales]).to eq(3) # today_orders count
       expect(quick_stats[:revenue]).to eq(225) # 3 * 75
@@ -47,11 +47,11 @@ RSpec.describe AdminController, type: :controller do
 
     it "calculates revenue by day for last 7 days" do
       get :index
-      
+
       revenue_by_day = assigns(:revenue_by_day)
       expect(revenue_by_day).to be_an(Array)
       expect(revenue_by_day.length).to eq(7)
-      
+
       # Each day should have [day_name, revenue] format
       revenue_by_day.each do |day_data|
         expect(day_data).to be_an(Array)
@@ -63,10 +63,10 @@ RSpec.describe AdminController, type: :controller do
 
     it "includes today's revenue in revenue_by_day" do
       get :index
-      
+
       revenue_by_day = assigns(:revenue_by_day)
       today_data = revenue_by_day.find { |day| day[0] == Date.today.strftime("%A") }
-      
+
       expect(today_data).to be_present
       expect(today_data[1]).to eq(225) # today's total revenue
     end
@@ -78,7 +78,7 @@ RSpec.describe AdminController, type: :controller do
 
       it "handles empty data gracefully" do
         get :index
-        
+
         expect(assigns(:orders)).to be_empty
         expect(assigns(:quick_stats)[:sales]).to eq(0)
         expect(assigns(:quick_stats)[:revenue]).to be_nil

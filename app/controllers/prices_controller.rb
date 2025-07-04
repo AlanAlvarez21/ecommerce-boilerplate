@@ -3,15 +3,15 @@ class PricesController < ApplicationController
         @precios = Rails.cache.fetch("bbva_prices", expires_in: 1.hour) do
             fetch_prices_safely
         end
-        
+
         respond_to do |format|
             format.html
             format.json { render json: { prices: @precios, cached_at: Time.current.iso8601 } }
         end
     end
-    
+
     private
-    
+
     def fetch_prices_safely
         BbvaScraper.obtener_precios
     rescue StandardError => e

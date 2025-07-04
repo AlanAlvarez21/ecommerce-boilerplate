@@ -28,7 +28,7 @@ class Admin::StocksController < AdminController
 
     respond_to do |format|
       if @admin_stock.save
-        format.html { redirect_to admin_product_stock_path(@product, @admin_stock), notice: t('admin.stocks.created') }
+        format.html { redirect_to admin_product_stock_path(@product, @admin_stock), notice: t("admin.stocks.created") }
         format.json { render :show, status: :created, location: admin_product_stock_path(@product, @admin_stock) }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +41,7 @@ class Admin::StocksController < AdminController
   def update
     respond_to do |format|
       if @admin_stock.update(stock_params)
-        format.html { redirect_to admin_product_stocks_path(@admin_stock.product, @admin_stock), notice: t('admin.stocks.updated') }
+        format.html { redirect_to admin_product_stocks_path(@admin_stock.product, @admin_stock), notice: t("admin.stocks.updated") }
         format.json { render :show, status: :ok, location: admin_product_stock_path(@admin_stock.product, @admin_stock) }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -55,7 +55,7 @@ class Admin::StocksController < AdminController
     @admin_stock.destroy!
 
     respond_to do |format|
-      format.html { redirect_to admin_product_stocks_path(@admin_stock.product, @admin_stock), status: :see_other, notice: t('admin.stocks.deleted') }
+      format.html { redirect_to admin_product_stocks_path(@admin_stock.product, @admin_stock), status: :see_other, notice: t("admin.stocks.deleted") }
       format.json { head :no_content }
     end
   end

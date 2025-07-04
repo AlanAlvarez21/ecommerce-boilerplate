@@ -75,7 +75,7 @@ group :development, :test do
   gem "byebug"
 
   gem "dotenv-rails"
-  
+
   # RSpec testing framework
   gem "rspec-rails", "~> 6.0"
   gem "factory_bot_rails", "~> 6.4"
@@ -91,11 +91,11 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-  
+
   # Code coverage for RSpec
   gem "simplecov", require: false
   gem "simplecov-html", require: false
-  
+
   # Controller testing utilities for RSpec
   gem "rails-controller-testing"
 end

@@ -3,7 +3,7 @@ class Admin < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
+
   # Fix for Rails 8 and Devise compatibility
   def self.serialize_from_session(key, salt = nil)
     record = find_by(id: key)
