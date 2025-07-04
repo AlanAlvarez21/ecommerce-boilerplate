@@ -1,42 +1,41 @@
 class WebhooksController < ApplicationController
-  skip_forgery_protection
+  include ApiResponses
+  
+  skip_forgery_protection only: [:mercadopago]
+  before_action :verify_mercadopago_request, only: [:mercadopago]
+  before_action :set_payment_id, only: [:mercadopago]
 
   def mercadopago
-    payment_id = params[:data][:id]
-    sdk = Mercadopago::SDK.new(ENV['MP_ACCESS_TOKEN'])
-    payment_response = sdk.payment.get(payment_id)
-    payment = payment_response[:response]
-    
-    if payment['status'] == 'approved'
-      create_order(payment)
-      head :ok
-    else
-      head :unprocessable_entity
-    end
+    ProcessPaymentJob.perform_later(@payment_id)
+    render_success({ message: "Payment processing initiated" })
+  rescue StandardError => e
+    Rails.logger.error "Webhook processing failed: #{e.message}", {
+      payment_id: @payment_id,
+      params: params.to_unsafe_h,
+      error: e.message
+    }
+    render_error("Internal server error", :internal_server_error)
   end
 
   private
 
-  def create_order(payment)
-    address = "#{payment['additional_info']['payer']['address']['street_name']} #{payment['additional_info']['payer']['address']['street_number']}"
-
-    order = Order.create!(
-      customer_email: payment['payer']['email'],
-      total: payment['transaction_details']['total_paid_amount'],
-      address: address,
-      fulfilled: false
-    )
-
-    line_items = payment["metadata"].values
-
-    line_items.each do |item|
-      OrderProduct.create!(
-        order: order,
-        product_id: item["product_id"],
-        quantity: item["quantity"].to_i,
-        size: item["size"]
-        )
-      Stock.find(item["product_stock_id"]).decrement!(:amount, item["quantity"].to_i)
+  def verify_mercadopago_request
+    # Basic verification - in production, implement signature validation
+    unless params[:data]&.dig(:id)
+      Rails.logger.warn "Invalid webhook request - missing payment ID", {
+        params: params.to_unsafe_h,
+        headers: request.headers.env.select { |k,v| k.start_with?('HTTP_') }
+      }
+      render_error("Invalid request", :bad_request)
+      return false
     end
+    
+    # TODO: Implement proper MercadoPago signature validation
+    # https://www.mercadopago.com.ar/developers/es/docs/your-integrations/notifications/webhooks
+    true
+  end
+  
+  def set_payment_id
+    @payment_id = params[:data][:id]
   end
 end
