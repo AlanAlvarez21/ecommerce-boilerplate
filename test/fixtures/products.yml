@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: "Test Product One"
+  description: "This is a test product for automated testing purposes."
+  price: 99.99
+  active: true
+  category: one
+
+two:
+  name: "Test Product Two"
+  description: "This is another test product for automated testing purposes."
+  price: 149.99
+  active: true
+  category: two
