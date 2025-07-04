@@ -41,7 +41,7 @@ end
 RSpec.configure do |config|
   # Set default locale for tests consistently
   config.before(:each) do
-    I18n.locale = :es  # Match the application default
+    I18n.locale = :en  # Use English for consistent test messages
   end
   
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
