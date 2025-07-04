@@ -190,11 +190,6 @@ RSpec.describe Admin::StocksController, type: :controller do
     end
 
     context "with invalid parameters" do
-      before do
-        allow_any_instance_of(Stock).to receive(:update).and_return(false)
-        allow_any_instance_of(Stock).to receive(:errors).and_return(double(any?: true))
-      end
-
       it "renders the edit template" do
         patch :update, params: { product_id: product.id, id: stock.id, stock: invalid_attributes }
         expect(response).to render_template(:edit)
@@ -209,9 +204,6 @@ RSpec.describe Admin::StocksController, type: :controller do
       end
 
       it "returns errors for invalid attributes" do
-        allow_any_instance_of(Stock).to receive(:update).and_return(false)
-        allow_any_instance_of(Stock).to receive(:errors).and_return({ amount: ["can't be blank"] })
-        
         patch :update, params: { product_id: product.id, id: stock.id, stock: invalid_attributes }, format: :json
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -254,12 +246,12 @@ RSpec.describe Admin::StocksController, type: :controller do
 
       it "redirects to admin sign in for index" do
         get :index, params: { product_id: product.id }
-        expect(response).to redirect_to(new_admin_session_path)
+        expect(response.location).to include("/admins/sign_in")
       end
 
       it "redirects to admin sign in for show" do
         get :show, params: { product_id: product.id, id: stock.id }
-        expect(response).to redirect_to(new_admin_session_path)
+        expect(response.location).to include("/admins/sign_in")
       end
     end
   end

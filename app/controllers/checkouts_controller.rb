@@ -12,6 +12,7 @@ class CheckoutsController < ApplicationController
     end
     
     line_items = cart.map do |item|
+      return render json: { error: "Invalid product ID" }, status: 400 if item["id"].blank?
       product = Product.find(item["id"])
       product_stock = product.stocks.find { |stock| stock.size == item["size"] }
       

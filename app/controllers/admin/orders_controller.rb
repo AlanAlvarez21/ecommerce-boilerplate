@@ -27,7 +27,7 @@ class Admin::OrdersController < AdminController
     respond_to do |format|
       if @admin_order.save
         format.html { redirect_to admin_orders_path(@admin_order), notice: t('admin.orders.created') }
-        format.json { render :show, status: :created, location: @admin_order }
+        format.json { render :show, status: :created, location: admin_order_path(@admin_order) }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @admin_order.errors, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class Admin::OrdersController < AdminController
     respond_to do |format|
       if @admin_order.update(order_params)
         format.html { redirect_to admin_orders_path(@admin_order), notice: t('admin.orders.updated') }
-        format.json { render :show, status: :ok, location: @admin_order }
+        format.json { render :show, status: :ok, location: admin_order_path(@admin_order) }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @admin_order.errors, status: :unprocessable_entity }

@@ -70,9 +70,9 @@ RSpec.describe CheckoutsController, type: :controller do
 
     context "with insufficient stock" do
       let(:insufficient_cart_params) do
-        valid_cart_params.deep_merge(
-          cart: [{ quantity: "15" }]
-        )
+        valid_cart_params.deep_dup.tap do |params|
+          params[:cart][0][:quantity] = "15"
+        end
       end
 
       it "returns 400 status with error message" do

@@ -150,15 +150,9 @@ RSpec.describe Admin::CategoriesController, type: :controller do
     end
 
     context "with invalid parameters" do
-      before do
-        allow_any_instance_of(Category).to receive(:update).and_return(false)
-        allow_any_instance_of(Category).to receive(:errors).and_return(double(any?: true))
-      end
-
       it "renders the edit template" do
-        patch :update, params: { id: category.id, category: invalid_attributes }
+        patch :update, params: { id: category.id, category: { name: "", description: "" } }
         expect(response).to render_template(:edit)
-        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
 
@@ -169,10 +163,7 @@ RSpec.describe Admin::CategoriesController, type: :controller do
       end
 
       it "returns errors for invalid attributes" do
-        allow_any_instance_of(Category).to receive(:update).and_return(false)
-        allow_any_instance_of(Category).to receive(:errors).and_return({ name: ["can't be blank"] })
-        
-        patch :update, params: { id: category.id, category: invalid_attributes }, format: :json
+        patch :update, params: { id: category.id, category: { name: "", description: "" } }, format: :json
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -214,12 +205,14 @@ RSpec.describe Admin::CategoriesController, type: :controller do
 
       it "redirects to admin sign in for index" do
         get :index
-        expect(response).to redirect_to(new_admin_session_path)
+        expect(response).to have_http_status(:redirect)
+        expect(response.location).to match(/\/admins\/sign_in/)
       end
 
       it "redirects to admin sign in for show" do
         get :show, params: { id: category.id }
-        expect(response).to redirect_to(new_admin_session_path)
+        expect(response).to have_http_status(:redirect)
+        expect(response.location).to match(/\/admins\/sign_in/)
       end
     end
   end

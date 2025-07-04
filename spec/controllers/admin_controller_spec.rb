@@ -8,8 +8,8 @@ RSpec.describe AdminController, type: :controller do
   end
 
   describe "GET #index" do
-    let!(:fulfilled_order) { create(:order, fulfilled: true, total: 100, created_at: 1.hour.ago) }
-    let!(:unfulfilled_orders) { create_list(:order, 7, fulfilled: false, total: 50, created_at: 2.hours.ago) }
+    let!(:fulfilled_order) { create(:order, fulfilled: true, total: 100, created_at: 1.day.ago) }
+    let!(:unfulfilled_orders) { create_list(:order, 7, fulfilled: false, total: 50, created_at: 1.day.ago) }
     let!(:today_orders) { create_list(:order, 3, fulfilled: true, total: 75, created_at: 30.minutes.ago) }
     
     before do
@@ -95,7 +95,7 @@ RSpec.describe AdminController, type: :controller do
 
       it "redirects to admin sign in" do
         get :index
-        expect(response).to redirect_to(new_admin_session_path)
+        expect(response.location).to include("/admins/sign_in")
       end
     end
   end

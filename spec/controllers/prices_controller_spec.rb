@@ -1,4 +1,5 @@
 require 'rails_helper'
+require Rails.root.join('app', 'services', 'BbvaScraper')
 
 RSpec.describe PricesController, type: :controller do
   describe "GET #index" do

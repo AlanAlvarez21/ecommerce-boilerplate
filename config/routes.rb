@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     registrations: "admin/registrations"
   }
 
-  authenticate :admin_user do
+  authenticate :admin do
     root to: "admin#index", as: :admin_root
   end
 
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   get "admin" => "admin#index"
   get "cart" => "cart#show"
-  get "precios", to: "precios#index"
+  get "precios", to: "prices#index"
 
   
   post "webhooks/mercadopago" => 'webhooks#mercadopago'

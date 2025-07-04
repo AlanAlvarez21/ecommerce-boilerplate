@@ -29,7 +29,7 @@ class Admin::StocksController < AdminController
     respond_to do |format|
       if @admin_stock.save
         format.html { redirect_to admin_product_stock_path(@product, @admin_stock), notice: t('admin.stocks.created') }
-        format.json { render :show, status: :created, location: @admin_stock }
+        format.json { render :show, status: :created, location: admin_product_stock_path(@product, @admin_stock) }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @admin_stock.errors, status: :unprocessable_entity }
@@ -42,7 +42,7 @@ class Admin::StocksController < AdminController
     respond_to do |format|
       if @admin_stock.update(stock_params)
         format.html { redirect_to admin_product_stocks_path(@admin_stock.product, @admin_stock), notice: t('admin.stocks.updated') }
-        format.json { render :show, status: :ok, location: @admin_stock }
+        format.json { render :show, status: :ok, location: admin_product_stock_path(@admin_stock.product, @admin_stock) }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @admin_stock.errors, status: :unprocessable_entity }

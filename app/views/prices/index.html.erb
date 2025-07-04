@@ -1,0 +1,15 @@
+<h1><%= t('prices.title') %></h1>
+
+<% if @precios %>
+  <div class="prices-container">
+    <% @precios.each do |metal, prices| %>
+      <div class="price-card">
+        <h3><%= metal %></h3>
+        <p>Compra: <%= prices['compra'] %></p>
+        <p>Venta: <%= prices['venta'] %></p>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p><%= t('prices.no_data') %></p>
+<% end %>

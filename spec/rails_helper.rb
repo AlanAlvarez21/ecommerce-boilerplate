@@ -13,6 +13,9 @@ require 'factory_bot_rails'
 # Include Devise test helpers
 require 'devise'
 
+# Include rails-controller-testing
+require 'rails-controller-testing'
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -36,6 +39,11 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
+  # Set default locale for tests consistently
+  config.before(:each) do
+    I18n.locale = :es  # Match the application default
+  end
+  
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')
@@ -52,6 +60,37 @@ RSpec.configure do |config|
   # Include Devise test helpers for controller specs
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
+  
+  # Include Rails controller testing helpers
+  config.include Rails::Controller::Testing::TestProcess, type: :controller
+  config.include Rails::Controller::Testing::TemplateAssertions, type: :controller
+  config.include Rails::Controller::Testing::Integration, type: :controller
+  
+  # Configure Devise for testing
+  config.before(:each, type: :controller) do
+    @request.env["devise.mapping"] = Devise.mappings[:admin] if @request
+  end
+  
+  # Add custom sign_in and sign_out methods for Admin model
+  config.include Module.new {
+    def sign_in(resource, deprecated = nil, scope: nil)
+      if resource.is_a?(Admin)
+        scope ||= :admin
+        @request.env["devise.mapping"] = Devise.mappings[:admin]
+      end
+      super(resource, deprecated, scope: scope)
+    end
+    
+    def sign_out(resource_or_scope = nil)
+      if resource_or_scope.is_a?(Admin)
+        scope = :admin
+        @request.env["devise.mapping"] = Devise.mappings[:admin]
+        super(scope)
+      else
+        super(resource_or_scope)
+      end
+    end
+  }, type: :controller
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false

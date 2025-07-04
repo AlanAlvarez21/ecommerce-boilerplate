@@ -67,6 +67,7 @@ group :development, :test do
   # RSpec testing framework
   gem "rspec-rails", "~> 6.0"
   gem "factory_bot_rails", "~> 6.4"
+  gem "faker", "~> 3.0"
 end
 
 group :development do
@@ -82,4 +83,7 @@ group :test do
   # Code coverage for RSpec
   gem "simplecov", require: false
   gem "simplecov-html", require: false
+  
+  # Controller testing utilities for RSpec
+  gem "rails-controller-testing"
 end
