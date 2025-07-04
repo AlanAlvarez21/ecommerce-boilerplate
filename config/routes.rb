@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   root "home#index"
 
+  # Health checks (should be at the top for monitoring)
+  get '/health', to: 'health#check'
+  get '/health/liveness', to: 'health#liveness'
+  get '/health/readiness', to: 'health#readiness'
+
   devise_for :admins, controllers: {
     registrations: "admin/registrations"
   }
