@@ -23,6 +23,7 @@ This is a Rails 8.0.1 ecommerce application running Ruby 3.3.4, using Docker wit
 - Rails server only: `bin/rails server`
 - Tailwind watcher only: `bin/rails tailwindcss:watch`
 - Database operations: `bin/rails db:create db:migrate db:seed`
+- Background jobs: `bin/sidekiq` (Sidekiq worker process)
 
 ## Architecture Overview
 
@@ -52,6 +53,12 @@ This is a Rails 8.0.1 ecommerce application running Ruby 3.3.4, using Docker wit
 - **MercadoPagoSdk**: Payment processing integration
 - **BbvaScrapper**: External price data scraping
 - **UpdateCoinPricesJob**: Background job for price updates
+
+### Background Jobs (Sidekiq)
+- **EmailNotificationJob**: Sends order confirmation and update emails
+- **Redis**: Message broker and job storage (redis://redis:6379/0)
+- **Sidekiq Web UI**: Available at `/sidekiq` (admin authentication required)
+- **Multiple Queues**: critical, default, low priority
 
 ### Authentication
 - Admin authentication using Devise

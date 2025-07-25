@@ -12,6 +12,10 @@ Rails.application.routes.draw do
 
   authenticate :admin do
     root to: "admin#index", as: :admin_root
+    
+    # Sidekiq Web UI (only for admins)
+    require "sidekiq/web"
+    mount Sidekiq::Web => "/sidekiq"
   end
 
   namespace :admin do

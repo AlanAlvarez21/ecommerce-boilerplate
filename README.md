@@ -43,6 +43,7 @@ This is a complete e-commerce **boilerplate/template** designed to help you **la
 ### **Technical**
 - 🚀 **Rails 8.0.1** with latest improvements
 - 🐘 **PostgreSQL** as database
+- 🔴 **Redis + Sidekiq** for background jobs
 - ⚡ **Stimulus + Turbo** for interactivity
 - 🎨 **Tailwind CSS** for styling
 - 🐳 **Docker** with devcontainers
@@ -145,6 +146,53 @@ https://your-domain.com/webhooks/mercadopago
 
 ---
 
+## 🔴 Background Jobs with Sidekiq
+
+This template includes **Sidekiq** for handling background jobs like email notifications, data processing, and other asynchronous tasks.
+
+### **Features**
+- **Email notifications** for order confirmations and updates
+- **Web UI** for monitoring jobs at `/sidekiq` (admin only)
+- **Multiple queues** (critical, default, low priority)
+- **Automatic retries** and error handling
+- **Redis integration** for job storage
+
+### **Usage**
+
+```ruby
+# Queue a background job
+EmailNotificationJob.perform_later(order.id, 'order_confirmation')
+
+# Queue with specific priority
+EmailNotificationJob.set(queue: :critical).perform_later(order.id)
+
+# Schedule for later
+EmailNotificationJob.set(wait: 1.hour).perform_later(order.id)
+```
+
+### **Monitoring**
+- **Sidekiq Web UI**: http://localhost:3000/sidekiq (requires admin login)
+- **Redis CLI**: `redis-cli -h redis` (from within container)
+
+### **Creating Jobs**
+
+```ruby
+# Generate a new job
+bin/rails generate job ProcessOrder
+
+# Example job structure
+class ProcessOrderJob < ApplicationJob
+  queue_as :default
+  
+  def perform(order_id)
+    order = Order.find(order_id)
+    # Process the order...
+  end
+end
+```
+
+---
+
 ## 🛠️ Development Commands
 
 ```bash
@@ -158,6 +206,11 @@ bin/rails db:create         # Create database
 bin/rails db:migrate        # Run migrations
 bin/rails db:seed           # Seed with sample data
 bin/rails db:reset          # Reset and seed
+
+# Background Jobs
+bin/sidekiq                 # Start Sidekiq worker
+bundle exec sidekiq         # Start Sidekiq with default config
+sidekiq-cli stats           # Show Sidekiq stats
 
 # Testing
 bundle exec rspec           # Run tests

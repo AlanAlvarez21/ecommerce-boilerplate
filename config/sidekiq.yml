@@ -1,0 +1,25 @@
+# Sidekiq configuration file
+---
+:verbose: false
+:pidfile: ./tmp/pids/sidekiq.pid
+:logfile: ./log/sidekiq.log
+:concurrency: 5
+
+# Queues
+:queues:
+  - critical
+  - default
+  - low
+
+# Environment specific settings
+production:
+  :concurrency: 10
+  :timeout: 30
+
+development:
+  :concurrency: 2
+  :timeout: 10
+
+test:
+  :concurrency: 1
+  :timeout: 5

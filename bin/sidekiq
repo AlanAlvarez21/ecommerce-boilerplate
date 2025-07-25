@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require_relative "../config/environment"
+
+# Start Sidekiq with custom configuration
+exec "bundle exec sidekiq -C config/sidekiq.yml"

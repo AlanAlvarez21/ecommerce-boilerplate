@@ -22,6 +22,24 @@ services:
     - redis
     - postgres
 
+  sidekiq:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+
+    volumes:
+    - ../..:/workspaces:cached
+
+    command: bundle exec sidekiq
+
+    depends_on:
+    - rails-app
+    - redis
+    - postgres
+
+    environment:
+    - REDIS_URL=redis://redis:6379/0
+
   selenium:
     image: selenium/standalone-chromium
     restart: unless-stopped
